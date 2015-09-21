@@ -1,0 +1,56 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+ol.legalese-list {
+
+}
+
+ol.legalese-list-none {
+    list-style-type: none;
+    padding: 10px;
+}
+
+ol.legalese-list-none {
+    padding-left: 0;
+    line-height: 190%;
+    margin-left: 0;
+}
+
+ol.legalese-list-roman {
+    list-style-type: lower-roman;
+}
+
+ol.legalese-list-numbers {
+    list-style-type: decimal;
+}
+
+ul.legalese-list-dashes {
+    list-style-type: hyphen;
+}
+
+ol.legalese-list-letters {
+    list-style-type: lower-alpha;
+}
+
+li.legalese-text {
+    padding-top: 15px;
+}
+
+a.no-decoration {
+    text-decoration: none;
+    color: #000;
+}
+
+span.legalese-art-marker {
+    background-color: #EEEEEE;
+    padding: 3px;
+    padding-left: 5px;
+    margin-right: 5px;
+    border-radius: 2px;
+}
+
+/*span.legalese-leaf:hover {*/
+    /*background-color: #faffb7;*/
+    /*border-radius: 5px;*/
+/*}*/

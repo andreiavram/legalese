@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Documente
+{% endblock %}
+
+{% block content %}
+    <ul>
+    {% for document in object_list %}
+        <li><a href = "{% url "document_detail" pk=document.id %}">{{ document.title }}</a><br />
+        <small>{{ document.description }}</small></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

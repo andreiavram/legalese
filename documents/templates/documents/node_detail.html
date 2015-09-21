@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ object.document.title }}
+{% endblock %}
+
+{% block page_title %}
+    {{ object.document.title }}<br><small>{{ object.document.description }}</small>
+{% endblock %}
+
+{% block content %}
+    {% for node in nodes %}
+        {% if node.is_node_marker and node.node_type == "start" %}
+            <{% if node.numbering_type == "dashes" %}ul{% else %}ol{% endif %} class = "legalese-list {% if node.title_children %}legalese-list-none{% else %}legalese-list-{{ node.numbering_type }} {% endif %} ">
+        {% endif %}
+
+        {% if not node.is_node_marker %}
+            <li class = "{% if not node.is_title %}legalese-text{% endif %}">
+                {% if node.is_title %}<h2>{% else %}<span class = "legalese-leaf">{% endif %}
+
+                {% if not node.ignore_numbering %}
+                    {% if node.is_title %}{{ node.get_prefix }}{% endif %}
+                {% endif %}
+                {% if node.overall_order %}
+                    <a class = "no-decoration" href = "#leg-{{ node.id }}" name = "leg-{{ node.id }}"><span class = "legalese-art-marker"><strong>Art. {{ node.overall_order }}. </strong></span></a>
+                {% endif %}
+                {{ node.content }}
+
+                {% if node.is_title %}</h2>{% else %}</span>{% endif %}
+            {% if not node.child_nodes.count %}
+                </li>
+            {% endif %}
+        {% endif %}
+
+        {% if node.is_node_marker and node.node_type == "end" %}
+            </{% if node.numbering_type == "dashes" %}ul{% else %}ol{% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
