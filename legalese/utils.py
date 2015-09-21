@@ -1,7 +1,7 @@
 def int_to_roman(number):
     """ Convert an integer to a Roman numeral. """
 
-    if not isinstance(number, type(1)):
+    if not isinstance(number, type(1)) and not isinstance(number, long):
         raise TypeError, "expected integer, got %s" % type(number)
     if not 0 < number < 4000:
         raise ValueError, "Argument must be between 1 and 3999"
