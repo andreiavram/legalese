@@ -89,3 +89,8 @@ TEMPLATE_DIRS = global_settings.TEMPLATE_DIRS + (os.path.join(BASE_DIR, "templat
 STATICFILES_DIRS = (
     ("css", os.path.join(BASE_DIR, "legalese", "static", "css")),
 )
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
