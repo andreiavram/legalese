@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 import os
 import re
 from documents.models import Node, Document, DocumentProvider
-
+from django.conf import settings
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -14,7 +14,7 @@ class Command(BaseCommand):
         #     self.stderr.write(u"File to open does not exist / is not accessible!\n")
         #     return
 
-        with open("/vagrant/statut2.txt", "rb") as f:
+        with open(os.path.join(settings.BASE_DIR, "statut2.txt"), "rb") as f:
             lines = f.readlines()
 
         title = "Statut"
