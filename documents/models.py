@@ -19,7 +19,7 @@ class Document(models.Model):
     parent_document = models.ForeignKey("documents.Document", null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(unique=True)
-    provider = models.ForeignKey("DocumentProvider")
+    provider = models.ForeignKey("DocumentProvider", null=True, blank=True)
 
     root_numbering = models.CharField(max_length=255, default="none")
     root_numbering_format = models.CharField(max_length=255, default="%%i")

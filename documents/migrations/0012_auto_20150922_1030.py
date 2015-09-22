@@ -23,7 +23,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='document',
             name='provider',
-            field=models.ForeignKey(default=1, to='documents.DocumentProvider'),
-            preserve_default=False,
+            field=models.ForeignKey(blank=True, to='documents.DocumentProvider', null=True),
         ),
     ]
