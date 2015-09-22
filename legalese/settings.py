@@ -85,6 +85,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "legalese", "static")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 TEMPLATE_DIRS = global_settings.TEMPLATE_DIRS + (os.path.join(BASE_DIR, "templates"), )
 
 STATICFILES_DIRS = (

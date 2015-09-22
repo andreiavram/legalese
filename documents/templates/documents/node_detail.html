@@ -9,6 +9,8 @@
 {% endblock %}
 
 {% block content %}
+    <a href = "{% url "document_detail" slug=object.document.slug %}">Înapoi la document</a>
+
     {% for node in nodes %}
         {% if node.is_node_marker and node.node_type == "start" %}
             <{% if node.numbering_type == "dashes" %}ul{% else %}ol{% endif %} class = "legalese-list {% if node.title_children %}legalese-list-none{% else %}legalese-list-{{ node.numbering_type }} {% endif %} ">

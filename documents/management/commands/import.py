@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 import os
 import re
-from documents.models import Node, Document
+from documents.models import Node, Document, DocumentProvider
 
 
 class Command(BaseCommand):
@@ -18,7 +18,9 @@ class Command(BaseCommand):
             lines = f.readlines()
 
         title = "Statut"
-        document = Document.objects.create(title=u"Parsed document (%s)" % title)
+        document = Document.objects.create(title=u"Parsed document (%s)" % title,
+                                           provider=DocumentProvider.objects.all().first(),
+                                           slug="statut-%d" % (Document.objects.count() + 1, ))
 
         parent = None
         number_of_tabs = 0

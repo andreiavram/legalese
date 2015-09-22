@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import permalink
+from django.utils.text import slugify
 from legalese.utils import int_to_roman
 
 
@@ -18,6 +19,7 @@ class Document(models.Model):
     parent_document = models.ForeignKey("documents.Document", null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(unique=True)
+    provider = models.ForeignKey("DocumentProvider")
 
     root_numbering = models.CharField(max_length=255, default="none")
     root_numbering_format = models.CharField(max_length=255, default="%%i")
@@ -68,7 +70,12 @@ class Document(models.Model):
 
     @permalink
     def get_absolute_url(self):
-        return "document_detail", [], {"pk": self.id}
+        return "document_detail", [], {"slug": self.slug}
+
+    def save(self, **kwargs):
+        if self.slug is None:
+            self.slug = "%s-%d" % (slugify(self.title), Document.objects.all().count() + 1)
+        return super(Document, self).save(**kwargs)
 
 
 class Node(models.Model):
@@ -154,3 +161,15 @@ class Node(models.Model):
             return True
 
         return self.get_closest_overall_parent() != self
+
+
+def document_provider_upload_to(instance, file_name):
+    return "logo/%s" % file_name
+
+
+class DocumentProvider(models.Model):
+    name = models.CharField(max_length=255)
+    logo = models.ImageField(null=True, blank=True, upload_to=document_provider_upload_to)
+
+    def __unicode__(self):
+        return self.name
